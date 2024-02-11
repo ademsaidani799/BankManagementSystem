@@ -1,18 +1,26 @@
-package com.example.BankManagementSystem.DTOs;
+package com.example.BankManagementSystem.Entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Branch {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private String id;
+    private Long id;
 
     private String address;
 
     private String phone;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

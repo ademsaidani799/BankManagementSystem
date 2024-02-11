@@ -1,10 +1,15 @@
-package com.example.BankManagementSystem.DTOs;
+package com.example.BankManagementSystem.Entities;
+
+import jakarta.persistence.*;
 
 import java.util.Date;
 
+@MappedSuperclass
 public abstract class Person {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String login;
     private int passhash;
@@ -15,11 +20,11 @@ public abstract class Person {
 
     private Date registrationDate;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

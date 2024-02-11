@@ -1,11 +1,17 @@
-package com.example.BankManagementSystem.DTOs;
+package com.example.BankManagementSystem.Entities;
 
-public class Employee extends Person{
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+public class Employee extends Person {
 
     private String position;
 
+    @ManyToOne
+    @JoinColumn(name="manager_id")
     private Employee manager;
-
+    @ManyToOne
+    @JoinColumn(name="branch_id")
     private Branch branch;
 
     public String getPosition() {

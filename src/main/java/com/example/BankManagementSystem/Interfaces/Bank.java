@@ -7,39 +7,39 @@ import java.util.List;
 public interface Bank {
 
     // Create
-    boolean add(Customer customer);
-    boolean add(Employee employee);
-    boolean add(Account account);
-    boolean add(Loan loan);
-    boolean add(Branch branch);
+    boolean add(CustomerDto customerDto);
+    boolean add(EmployeeDto employee);
+    boolean add(AccountDto accountDto);
+    boolean add(LoanDto loanDto);
+    boolean add(BranchDto branchDto);
 
-    boolean add(Transaction transaction);
+    boolean add(TransactionDto transaction);
 
     // Read
-    List<Customer> findAllCustomers();
-    Customer findCustomer(String param);
+    List<CustomerDto> findAllCustomers();
+    CustomerDto findCustomer(String param);
 
-    List<Employee>findAllEmployees();
-    Employee findEmployee(String param);
+    List<EmployeeDto>findAllEmployees();
+    EmployeeDto findEmployee(String param);
 
-    List<Account>findAccountsOfCustomer();
-    List<Loan>findLoansOfCustomer();
+    List<AccountDto>findAccountsOfCustomer();
+    List<LoanDto>findLoansOfCustomer();
 
-    List<Transaction> findTransactionsOfAccount();
-    List<Transaction> findTransactionsOfCustomer();
+    List<TransactionDto> findTransactionsOfAccount();
+    List<TransactionDto> findTransactionsOfCustomer();
     String getTransactionDetails();
 
     // Update
-    boolean update(Customer customer);
-    boolean update(Employee employee);
-    boolean update(Account account);
-    boolean update(Loan loan);
-    boolean update(Branch branch);
+    boolean update(CustomerDto customerDto);
+    boolean update(EmployeeDto employeeDto);
+    boolean update(AccountDto accountDto);
+    boolean update(LoanDto loanDto);
+    boolean update(BranchDto branchDto);
 
     // Delete
-    boolean delete(Customer customer);
-    boolean delete(Employee employee);
-    boolean delete(Account account);
-    boolean delete(Loan loan);
-    boolean delete(Branch branch);
+    boolean delete(CustomerDto customerDto);
+    boolean delete(EmployeeDto employeeDto);
+    boolean delete(AccountDto accountDto);
+    boolean delete(LoanDto loanDto);
+    boolean delete(BranchDto branchDto);
 }

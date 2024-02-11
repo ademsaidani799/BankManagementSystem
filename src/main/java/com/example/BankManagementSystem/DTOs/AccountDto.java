@@ -3,13 +3,13 @@ package com.example.BankManagementSystem.DTOs;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Account {
+public class AccountDto {
 
     private int id;
 
-    private Customer customer;
+    private CustomerDto customerDto;
 
-    private Branch branch;
+    private BranchDto branchDto;
 
     private Date openingDate;
 
@@ -25,20 +25,20 @@ public class Account {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public CustomerDto getCustomer() {
+        return customerDto;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer(CustomerDto customerDto) {
+        this.customerDto = customerDto;
     }
 
-    public Branch getBranch() {
-        return branch;
+    public BranchDto getBranch() {
+        return branchDto;
     }
 
-    public void setBranch(Branch branch) {
-        this.branch = branch;
+    public void setBranch(BranchDto branchDto) {
+        this.branchDto = branchDto;
     }
 
     public Date getOpeningDate() {

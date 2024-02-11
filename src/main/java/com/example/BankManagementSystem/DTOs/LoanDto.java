@@ -3,13 +3,13 @@ package com.example.BankManagementSystem.DTOs;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Loan {
+public class LoanDto {
 
     private int id;
 
-    private Customer customer;
+    private CustomerDto customerDto;
 
-    private Branch branch;
+    private BranchDto branchDto;
 
     private Date startingDate;
 

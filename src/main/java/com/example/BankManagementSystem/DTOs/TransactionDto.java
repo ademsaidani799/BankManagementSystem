@@ -3,16 +3,16 @@ package com.example.BankManagementSystem.DTOs;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Transaction {
+public class TransactionDto {
 
     private int id;
     private Date date;
 
     private BigDecimal amount;
 
-    private Account account;
+    private AccountDto accountDto;
 
-    private Employee teller;
+    private EmployeeDto teller;
 
     public int getId() {
         return id;
@@ -38,19 +38,19 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Account getAccount() {
-        return account;
+    public AccountDto getAccount() {
+        return accountDto;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccount(AccountDto accountDto) {
+        this.accountDto = accountDto;
     }
 
-    public Employee getTeller() {
+    public EmployeeDto getTeller() {
         return teller;
     }
 
-    public void setTeller(Employee teller) {
+    public void setTeller(EmployeeDto teller) {
         this.teller = teller;
     }
 }
