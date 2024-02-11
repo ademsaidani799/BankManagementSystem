@@ -54,7 +54,7 @@ public class ApiController {
     //Transaction controller
     public List<TransactionDto> getTransactionsOfAccount(AccountDto accountDto){};
 
-    public String getTransactionDetails(Transaction transaction){};
+    public String getTransactionDetails(TransactionDto transactionDto){};
 
 
     public boolean withdraw(AccountDto accountDto, BigDecimal amount)  {};
@@ -73,5 +73,5 @@ public class ApiController {
 
     public String getBranchDetails(){};
 
-    public List<Employee> getBranchEmployees(){};
+    public List<EmployeeDto> getBranchEmployees(){};
 }
