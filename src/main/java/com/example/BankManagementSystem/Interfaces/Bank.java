@@ -1,14 +1,16 @@
 package com.example.BankManagementSystem.Interfaces;
 
 import com.example.BankManagementSystem.DTOs.*;
+import com.example.BankManagementSystem.Entities.Customer;
+import com.example.BankManagementSystem.Entities.Employee;
 
 import java.util.List;
 
 public interface Bank {
 
     // Create
-    boolean add(CustomerDto customerDto);
-    boolean add(EmployeeDto employee);
+    public Customer add(CustomerDto customerDto);
+    public Employee add(EmployeeDto employee);
     boolean add(AccountDto accountDto);
     boolean add(LoanDto loanDto);
     boolean add(BranchDto branchDto);

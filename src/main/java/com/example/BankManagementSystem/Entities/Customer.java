@@ -3,29 +3,30 @@ package com.example.BankManagementSystem.Entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Customer extends Person {
 
     @OneToMany(mappedBy = "customer")
-    private Set<Account> accounts;
+    private List<Account> accounts;
     @OneToMany(mappedBy = "customer")
-    private Set<Loan> loans;
+    private List<Loan> loans;
 
-    public Set<Account> getAccounts() {
+    public List<Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(Set<Account> accounts) {
+    public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
 
-    public Set<Loan> getLoans() {
+    public List<Loan> getLoans() {
         return loans;
     }
 
-    public void setLoans(Set<Loan> loans) {
+    public void setLoans(List<Loan> loans) {
         this.loans = loans;
     }
 }

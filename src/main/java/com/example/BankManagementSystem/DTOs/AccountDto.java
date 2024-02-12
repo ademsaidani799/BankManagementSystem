@@ -5,25 +5,18 @@ import java.util.Date;
 
 public class AccountDto {
 
-    private int id;
 
     private CustomerDto customerDto;
 
     private BranchDto branchDto;
 
     private Date openingDate;
+    private String type;
 
     private BigDecimal currentBalance;
 
     private BigDecimal interestRate;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public CustomerDto getCustomer() {
         return customerDto;

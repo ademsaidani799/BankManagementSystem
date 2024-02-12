@@ -4,7 +4,6 @@ import java.util.Date;
 
 public abstract class PersonDto {
 
-    private int id;
 
     private String login;
     private int passhash;
@@ -15,13 +14,7 @@ public abstract class PersonDto {
 
     private Date registrationDate;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getLogin() {
         return login;

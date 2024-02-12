@@ -1,26 +1,27 @@
 package com.example.BankManagementSystem.DTOs;
 
+import java.util.List;
 import java.util.Set;
 
 public class CustomerDto extends PersonDto {
 
-    private Set<AccountDto> accountDtos;
+    private List<AccountDto> accountDtos;
 
-    private Set<LoanDto> loanDtos;
+    private List<LoanDto> loanDtos;
 
-    public Set<AccountDto> getAccounts() {
+    public List<AccountDto> getAccounts() {
         return accountDtos;
     }
 
-    public void setAccounts(Set<AccountDto> accountDtos) {
+    public void setAccounts(List<AccountDto> accountDtos) {
         this.accountDtos = accountDtos;
     }
 
-    public Set<LoanDto> getLoans() {
+    public List<LoanDto> getLoans() {
         return loanDtos;
     }
 
-    public void setLoans(Set<LoanDto> loanDtos) {
+    public void setLoans(List<LoanDto> loanDtos) {
         this.loanDtos = loanDtos;
     }
 }

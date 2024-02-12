@@ -5,22 +5,16 @@ import java.util.Date;
 
 public class TransactionDto {
 
-    private int id;
+
     private Date date;
 
     private BigDecimal amount;
-
     private AccountDto accountDto;
 
     private EmployeeDto teller;
+    private String type;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Date getDate() {
         return date;
