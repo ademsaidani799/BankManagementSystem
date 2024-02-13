@@ -67,4 +67,17 @@ public class Transaction {
     public void setTeller(Employee teller) {
         this.teller = teller;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", date=" + date +
+                ", amount=" + amount +
+                ", account=" + (account != null ? account.getId() : null) +
+                ", teller=" + (teller != null ? teller.getId() : null) +
+                ", type='" + type + '\'' +
+                '}';
+    }
+
 }

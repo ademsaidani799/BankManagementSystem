@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BankImplService implements Bank {
@@ -154,6 +155,68 @@ public Customer add(CustomerDto customerDto){
         transaction.setType(transactionDto.getType());
 
         return transactionRepositories.saveAndFlush(transaction);
+    }
+
+    //Implementation of Create
+    public List<Customer> findAllCustomers(){
+       return customerRepositories.findAll();
+    }
+
+    public Optional<Customer> findCustomer(long id){
+        return customerRepositories.findById(id);
+    }
+
+    public List<Employee> findAllEmployees(){
+        return employeeRepositories.findAll();
+    }
+    public Optional<Employee> findEmployee(Long id){
+        return employeeRepositories.findById(id);
+
+    }
+
+
+
+    public List<Account> findAccountsOfCustomer(Long customerId) {
+        // Retrieve the customer by ID
+        Customer customer = customerRepositories.findById(customerId).orElse(null);
+
+        if (customer != null) {
+            // Return the list of accounts associated with the customer
+            return customer.getAccounts();
+        } else {
+            // Handle the case where the customer is not found
+            // You might throw an exception or handle it based on your application logic
+            // For example:
+            throw new EntityNotFoundException("Customer not found");
+        }
+    }
+
+    public List<Loan> findLoansOfCustomer(Long customerId) {
+        Customer customer = customerRepositories.findById(customerId).orElse(null);
+
+        if (customer != null) {
+            return customer.getLoans();
+        } else {
+            // Handle the case where the customer is not found
+            // You might throw an exception or handle it based on your application logic
+            // For example:
+            throw new EntityNotFoundException("Customer not found");
+        }
+    }
+
+    public List<Transaction> findTransactionsOfAccount(Long id){
+        return transactionRepositories.findTransactionsByAccount_Id(id);
+    }
+
+    public List<Transaction> findTransactionsOfCustomer(Long id) {
+        return transactionRepositories.findTransactionsByAccount_Customer_Id(id);
+    }
+
+    public String getTransactionDetails(Long id){
+        Optional<Transaction> transaction = transactionRepositories.findById(id);
+
+        if (transaction!=null){return transaction.toString();}
+        return "No such transaction found!";
     }
 
 }

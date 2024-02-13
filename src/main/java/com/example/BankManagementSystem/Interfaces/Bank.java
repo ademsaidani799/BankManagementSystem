@@ -4,6 +4,7 @@ import com.example.BankManagementSystem.DTOs.*;
 import com.example.BankManagementSystem.Entities.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Bank {
 
@@ -17,18 +18,18 @@ public interface Bank {
     public Transaction add(TransactionDto transaction);
 
     // Read
-    List<CustomerDto> findAllCustomers();
-    CustomerDto findCustomer(String param);
+   public List<Customer> findAllCustomers();
+   public Optional<Customer> findCustomer(long param);
 
-    List<EmployeeDto>findAllEmployees();
-    EmployeeDto findEmployee(String param);
+   public List<Employee>findAllEmployees();
+    public Optional<Employee> findEmployee(Long id);
 
-    List<AccountDto>findAccountsOfCustomer();
-    List<LoanDto>findLoansOfCustomer();
+    public List<Account>findAccountsOfCustomer(Long id);
+    public List<Loan>findLoansOfCustomer(Long id);
 
-    List<TransactionDto> findTransactionsOfAccount();
-    List<TransactionDto> findTransactionsOfCustomer();
-    String getTransactionDetails();
+    public List<Transaction> findTransactionsOfAccount(Long id);
+    public List<Transaction> findTransactionsOfCustomer(Long id);
+    public String getTransactionDetails(Long id);
 
     // Update
     boolean update(CustomerDto customerDto);
