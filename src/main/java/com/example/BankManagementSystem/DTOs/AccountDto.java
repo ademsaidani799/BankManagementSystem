@@ -13,6 +13,30 @@ public class AccountDto {
     private Date openingDate;
     private String type;
 
+    public CustomerDto getCustomerDto() {
+        return customerDto;
+    }
+
+    public void setCustomerDto(CustomerDto customerDto) {
+        this.customerDto = customerDto;
+    }
+
+    public BranchDto getBranchDto() {
+        return branchDto;
+    }
+
+    public void setBranchDto(BranchDto branchDto) {
+        this.branchDto = branchDto;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     private BigDecimal currentBalance;
 
     private BigDecimal interestRate;

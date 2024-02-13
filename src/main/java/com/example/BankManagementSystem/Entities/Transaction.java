@@ -20,6 +20,14 @@ public class Transaction {
     private Employee teller;
     private String type;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,8 +1,7 @@
 package com.example.BankManagementSystem.Interfaces;
 
 import com.example.BankManagementSystem.DTOs.*;
-import com.example.BankManagementSystem.Entities.Customer;
-import com.example.BankManagementSystem.Entities.Employee;
+import com.example.BankManagementSystem.Entities.*;
 
 import java.util.List;
 
@@ -11,11 +10,11 @@ public interface Bank {
     // Create
     public Customer add(CustomerDto customerDto);
     public Employee add(EmployeeDto employee);
-    boolean add(AccountDto accountDto);
-    boolean add(LoanDto loanDto);
-    boolean add(BranchDto branchDto);
+    public Account add(AccountDto accountDto);
+    public Loan add(LoanDto loanDto);
+    public Branch add(BranchDto branchDto);
 
-    boolean add(TransactionDto transaction);
+    public Transaction add(TransactionDto transaction);
 
     // Read
     List<CustomerDto> findAllCustomers();

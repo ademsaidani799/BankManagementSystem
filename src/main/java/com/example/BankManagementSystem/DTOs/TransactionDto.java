@@ -14,7 +14,21 @@ public class TransactionDto {
     private EmployeeDto teller;
     private String type;
 
+    public AccountDto getAccountDto() {
+        return accountDto;
+    }
 
+    public void setAccountDto(AccountDto accountDto) {
+        this.accountDto = accountDto;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public Date getDate() {
         return date;
