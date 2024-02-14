@@ -12,17 +12,17 @@ public interface Bank {
     public Customer add(CustomerDto customerDto);
     public Employee add(EmployeeDto employee);
     public Account add(AccountDto accountDto);
-    public Loan add(LoanDto loanDto);
-    public Branch add(BranchDto branchDto);
+    public Loan addLoan(LoanDto loanDto);
+    public Branch addBranch(BranchDto branchDto);
 
-    public Transaction add(TransactionDto transaction);
+    public Transaction addTransaction(TransactionDto transactionDto);
 
     // Read
    public List<Customer> findAllCustomers();
-   public Optional<Customer> findCustomer(long param);
+   public Customer findCustomer(long param);
 
    public List<Employee>findAllEmployees();
-    public Optional<Employee> findEmployee(Long id);
+    public Employee findEmployee(Long id);
 
     public List<Account>findAccountsOfCustomer(Long id);
     public List<Loan>findLoansOfCustomer(Long id);
@@ -32,16 +32,17 @@ public interface Bank {
     public String getTransactionDetails(Long id);
 
     // Update
-    boolean update(CustomerDto customerDto);
-    boolean update(EmployeeDto employeeDto);
-    boolean update(AccountDto accountDto);
-    boolean update(LoanDto loanDto);
-    boolean update(BranchDto branchDto);
+    public Customer update(Long customerId, CustomerDto customerDto);
+    public Employee update(Long employeeId, EmployeeDto employeeDto);
+    public Account update(Long accountId, AccountDto accountDto);
+    public Loan update(Long loanId, LoanDto loanDto);
+
+    public Branch update(Long branchId, BranchDto branchDto);
 
     // Delete
-    boolean delete(CustomerDto customerDto);
-    boolean delete(EmployeeDto employeeDto);
-    boolean delete(AccountDto accountDto);
-    boolean delete(LoanDto loanDto);
-    boolean delete(BranchDto branchDto);
+    public void deleteCustomer(Long id);
+    public void deleteEmployee(Long id);
+    public void deleteAccount(Long id);
+    public void deleteLoan(Long id);
+    public void deleteBranch(Long id);
 }

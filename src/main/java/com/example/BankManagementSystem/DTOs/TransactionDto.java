@@ -5,6 +5,11 @@ import java.util.Date;
 
 public class TransactionDto {
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
 
     private Date date;
 

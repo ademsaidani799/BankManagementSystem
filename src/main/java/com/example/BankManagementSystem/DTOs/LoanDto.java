@@ -5,6 +5,11 @@ import java.util.Date;
 
 public class LoanDto {
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
 
     private CustomerDto customerDto;
 

@@ -4,6 +4,11 @@ import java.util.Date;
 
 public abstract class PersonDto {
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
 
     private String login;
     private int passhash;

@@ -6,6 +6,7 @@ import com.example.BankManagementSystem.Entities.*;
 import com.example.BankManagementSystem.Interfaces.Bank;
 import com.example.BankManagementSystem.Repositories.*;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -76,17 +77,17 @@ public Customer add(CustomerDto customerDto){
 
     public Account add(AccountDto accountDto) {
 
-        Customer customerTemp = customerRepositories.findByLogin(accountDto.getCustomer().getLogin());
+        Optional<Customer> customerTemp = customerRepositories.findByLogin(accountDto.getCustomer().getLogin());
         Branch branchTemp = branchRepositories.findByAddress(accountDto.getBranch().getAddress());
 
         // Check if the customer already has a list of accounts
-        List<Account> accounts = customerTemp.getAccounts();
+        List<Account> accounts = customerTemp.get().getAccounts();
         if (accounts == null) {
             accounts = new ArrayList<>();
         }
 
         Account account = new Account();
-        account.setCustomer(customerTemp);
+        account.setCustomer(customerTemp.get());
         account.setBranch(branchTemp);
         account.setOpeningDate(new Date());
         account.setType(accountDto.getType());
@@ -95,24 +96,24 @@ public Customer add(CustomerDto customerDto){
         accounts.add(account);
 
         // Update the customer's accounts list
-        customerTemp.setAccounts(accounts);
-        customerRepositories.saveAndFlush(customerTemp);
+        customerTemp.get().setAccounts(accounts);
+        customerRepositories.saveAndFlush(customerTemp.get());
         return accountRepositories.saveAndFlush(account);
     }
 
     public Loan addLoan(LoanDto loanDto) {
 
-        Customer customerTemp = customerRepositories.findByLogin(loanDto.getCustomerDto().getLogin());
+        Optional<Customer> customerTemp = customerRepositories.findByLogin(loanDto.getCustomerDto().getLogin());
         Branch branchTemp = branchRepositories.findByAddress(loanDto.getBranchDto().getAddress());
 
         // Check if the customer already has a list of loans
-        List<Loan> loans = customerTemp.getLoans();
+        List<Loan> loans = customerTemp.get().getLoans();
         if (loans == null) {
             loans = new ArrayList<>();
         }
 
         Loan loan = new Loan();
-        loan.setCustomer(customerTemp);
+        loan.setCustomer(customerTemp.get());
         loan.setBranch(branchTemp);
         loan.setStartingDate(new Date());
         loan.setType(loanDto.getType());
@@ -123,9 +124,9 @@ public Customer add(CustomerDto customerDto){
         loans.add(loan);
 
         // Update the customer's loans list
-        customerTemp.setLoans(loans);
+        customerTemp.get().setLoans(loans);
 
-        customerRepositories.saveAndFlush(customerTemp);
+        customerRepositories.saveAndFlush(customerTemp.get());
         return loanRepositories.saveAndFlush(loan);
     }
 
@@ -137,8 +138,8 @@ public Customer add(CustomerDto customerDto){
         return branchRepositories.saveAndFlush(branch);
     }
     public Transaction addTransaction(TransactionDto transactionDto) {
-        Account accountTemp = accountRepositories.findById(transactionDto.getAccountId()).orElse(null);
-        Employee tellerTemp = employeeRepositories.findById(transactionDto.getTellerId()).orElse(null);
+        Account accountTemp = accountRepositories.findById(transactionDto.getAccount().getId()).orElse(null);
+        Employee tellerTemp = employeeRepositories.findById(transactionDto.getTeller().getId()).orElse(null);
 
         if (accountTemp == null || tellerTemp == null) {
             // Handle the case where the account or teller is not found
@@ -162,15 +163,15 @@ public Customer add(CustomerDto customerDto){
        return customerRepositories.findAll();
     }
 
-    public Optional<Customer> findCustomer(long id){
-        return customerRepositories.findById(id);
+    public Customer findCustomer(long id){
+        return customerRepositories.findById(id).get();
     }
 
     public List<Employee> findAllEmployees(){
         return employeeRepositories.findAll();
     }
-    public Optional<Employee> findEmployee(Long id){
-        return employeeRepositories.findById(id);
+    public Employee findEmployee(Long id){
+        return employeeRepositories.findById(id).get();
 
     }
 
@@ -215,8 +216,208 @@ public Customer add(CustomerDto customerDto){
     public String getTransactionDetails(Long id){
         Optional<Transaction> transaction = transactionRepositories.findById(id);
 
-        if (transaction!=null){return transaction.toString();}
+        if (transaction.isPresent()){return transaction.get().toString();}
         return "No such transaction found!";
     }
 
-}
+    //Implementation of update
+    public Account update(Long accountId, AccountDto accountDto) {
+        // Retrieve the existing account from the database
+        Optional<Account> optionalAccount = accountRepositories.findById(accountId);
+
+        if (optionalAccount.isPresent()) {
+            Account existingAccount = optionalAccount.get();
+
+            // Update the fields with the new values from the DTO
+            existingAccount.setType(accountDto.getType());
+            existingAccount.setOpeningDate(accountDto.getOpeningDate());
+            existingAccount.setCurrentBalance(accountDto.getCurrentBalance());
+            existingAccount.setInterestRate(accountDto.getInterestRate());
+
+            // Retrieve and set the customer from the DTO
+            String customerLogin = accountDto.getCustomer().getLogin();
+            if (customerLogin != null) {
+                Customer customer = customerRepositories.findByLogin(customerLogin).get();
+                if(customer!=null){
+                    existingAccount.setCustomer(customer);
+                }
+            }
+
+            // Retrieve and set the branch from the DTO
+            Long branchId = accountDto.getBranch().getId();
+            if (branchId != null) {
+                Optional<Branch> optionalBranch = branchRepositories.findById(branchId);
+                optionalBranch.ifPresent(existingAccount::setBranch);
+            }
+
+            // Save the updated account
+            return accountRepositories.saveAndFlush(existingAccount);
+        } else {
+            // Handle the case where the account with the given ID is not found
+            // You might want to throw an exception or handle it based on your application's logic
+            return null;
+        }
+    }
+
+    public Customer update(Long customerId, CustomerDto customerDto) {
+        // Retrieve the existing customer from the database
+        Optional<Customer> optionalCustomer = customerRepositories.findById(customerId);
+
+        if (optionalCustomer.isPresent()) {
+            Customer existingCustomer = optionalCustomer.get();
+
+            // Update the fields with the new values from the DTO
+            existingCustomer.setLogin(customerDto.getLogin());
+            existingCustomer.setPasshash(customerDto.getPasshash());
+            existingCustomer.setName(customerDto.getName());
+            existingCustomer.setPhone(customerDto.getPhone());
+            existingCustomer.setEmail(customerDto.getEmail());
+
+            // Save the updated customer
+            return customerRepositories.saveAndFlush(existingCustomer);
+        } else {
+            // Handle the case where the customer with the given ID is not found
+            // You might want to throw an exception or handle it based on your application's logic
+            return null;
+        }
+    }
+    public Employee update(Long employeeId, EmployeeDto employeeDto) {
+        // Retrieve the existing employee from the database
+        Optional<Employee> optionalEmployee = employeeRepositories.findById(employeeId);
+
+        if (optionalEmployee.isPresent()) {
+            Employee existingEmployee = optionalEmployee.get();
+
+            // Fetch Branch
+            Branch branchTemp = branchRepositories.findByAddress(employeeDto.getBranch().getAddress());
+
+            // Fetch Manager if provided
+            Employee manager = null;
+            if (employeeDto.getManager().getLogin() != null) {
+                manager = employeeRepositories.findByLogin(employeeDto.getManager().getLogin());
+            }
+
+            // Update the fields with the new values from the DTO
+            existingEmployee.setLogin(employeeDto.getLogin());
+            existingEmployee.setPasshash(employeeDto.getPasshash());
+            existingEmployee.setName(employeeDto.getName());
+            existingEmployee.setPhone(employeeDto.getPhone());
+            existingEmployee.setEmail(employeeDto.getEmail());
+
+            // Set Branch and Manager for the existing Employee
+            existingEmployee.setBranch(branchTemp);
+            existingEmployee.setManager(manager);
+
+            // Save the updated employee
+            return employeeRepositories.saveAndFlush(existingEmployee);
+        } else {
+            // Handle the case where the employee with the given ID is not found
+            // You might want to throw an exception or handle it based on your application's logic
+            return null;
+        }
+    }
+    public Loan update(Long loanId, LoanDto loanDto) {
+        // Retrieve the existing loan from the database
+        Optional<Loan> optionalLoan = loanRepositories.findById(loanId);
+
+        if (optionalLoan.isPresent()) {
+            Loan existingLoan = optionalLoan.get();
+
+            Customer customerTemp = customerRepositories.findByLogin(loanDto.getCustomerDto().getLogin()).get();
+            Branch branchTemp = branchRepositories.findByAddress(loanDto.getBranchDto().getAddress());
+
+            // Update the fields with the new values from the DTO
+            existingLoan.setCustomer(customerTemp);
+            existingLoan.setBranch(branchTemp);
+            existingLoan.setType(loanDto.getType());
+            existingLoan.setDueDate(loanDto.getDueDate());
+            existingLoan.setAmount(loanDto.getAmount());
+
+            // Save the updated loan
+            return loanRepositories.saveAndFlush(existingLoan);
+        } else {
+            // Handle the case where the loan with the given ID is not found
+            // You might want to throw an exception or handle it based on your application's logic
+            return null;
+        }
+
+    }
+
+
+    public Branch update(Long branchId, BranchDto branchDto) {
+        // Retrieve the existing branch from the database
+        Optional<Branch> optionalBranch = branchRepositories.findById(branchId);
+
+        if (optionalBranch.isPresent()) {
+            Branch existingBranch = optionalBranch.get();
+
+            // Update the fields with the new values from the DTO
+            existingBranch.setAddress(branchDto.getAddress());
+            existingBranch.setPhone(branchDto.getPhone());
+
+            // Save the updated branch
+            return branchRepositories.saveAndFlush(existingBranch);
+        } else {
+            // Handle the case where the branch with the given ID is not found
+            // You might want to throw an exception or handle it based on your application's logic
+            return null;
+        }
+    }
+
+    //Implementation of delete
+
+    public void deleteCustomer(Long customerId) {
+        // Check if the customer with the given ID exists before attempting to delete
+        if (customerRepositories.existsById(customerId)) {
+            // Delete the customer (and associated accounts and loans due to cascading)
+            customerRepositories.deleteById(customerId);
+        } else {
+            // Handle the case where the customer with the given ID is not found
+            // You might want to throw an exception or handle it based on your application's logic
+            throw new EntityNotFoundException("Customer with ID " + customerId + " not found");
+        }
+    }
+
+    public void deleteEmployee(Long employeeId) {
+        // Check if the employee with the given ID exists before attempting to delete
+        if (employeeRepositories.existsById(employeeId)) {
+            // Delete the employee (and associated branch due to cascading)
+            employeeRepositories.deleteById(employeeId);
+        } else {
+            // Handle the case where the employee with the given ID is not found
+            // You might want to throw an exception or handle it based on your application's logic
+            throw new EntityNotFoundException("Employee with ID " + employeeId + " not found");
+        }
+    }
+
+    public void deleteAccount(Long id) {
+        try {
+            // Attempt to delete the account
+            accountRepositories.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            // Handle the case where the account with the given ID is not found
+            throw new EntityNotFoundException("Account with ID " + id + " not found");
+        }
+    }
+
+    public void deleteLoan(Long id) {
+        try {
+            // Attempt to delete the loan
+            loanRepositories.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            // Handle the case where the loan with the given ID is not found
+            throw new EntityNotFoundException("Loan with ID " + id + " not found");
+        }
+    }
+
+    public void deleteBranch(Long id) {
+        // Check if the branch with the given ID exists before attempting to delete
+        if (branchRepositories.existsById(id)) {
+            // Delete the branch
+            branchRepositories.deleteById(id);
+        } else {
+            // Handle the case where the branch with the given ID is not found
+            // You might want to throw an exception or handle it based on your application's logic
+            throw new EntityNotFoundException("Branch with ID " + id + " not found");
+        }
+    }}

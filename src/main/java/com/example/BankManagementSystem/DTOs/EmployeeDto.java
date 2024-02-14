@@ -1,6 +1,19 @@
 package com.example.BankManagementSystem.DTOs;
 
 public class EmployeeDto extends PersonDto {
+    private Long id;
+
+    public BranchDto getBranchDto() {
+        return branchDto;
+    }
+
+    public void setBranchDto(BranchDto branchDto) {
+        this.branchDto = branchDto;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     private String position;
 

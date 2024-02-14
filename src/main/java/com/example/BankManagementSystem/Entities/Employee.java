@@ -1,9 +1,13 @@
 package com.example.BankManagementSystem.Entities;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 public class Employee extends Person {
+
+    @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long id;
 
     private String position;
 
