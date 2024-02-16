@@ -3,6 +3,7 @@ package com.example.BankManagementSystem.Entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 @Entity
 public class Account {
@@ -79,5 +80,19 @@ public class Account {
 
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
+    }
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return "Account{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", branch=" + branch +
+                ", openingDate=" + dateFormat.format(openingDate) +
+                ", type='" + type + '\'' +
+                ", currentBalance=" + currentBalance +
+                ", interestRate=" + interestRate +
+                '}';
     }
 }

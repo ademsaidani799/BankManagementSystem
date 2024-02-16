@@ -158,7 +158,7 @@ public Customer add(CustomerDto customerDto){
         return transactionRepositories.saveAndFlush(transaction);
     }
 
-    //Implementation of Create
+    //Implementation of read
     public List<Customer> findAllCustomers(){
        return customerRepositories.findAll();
     }
@@ -218,6 +218,12 @@ public Customer add(CustomerDto customerDto){
 
         if (transaction.isPresent()){return transaction.get().toString();}
         return "No such transaction found!";
+    }
+    public String getAccountDetails(Long id){
+        Optional<Account> account = accountRepositories.findById(id);
+        if (account.isPresent()){return account.get().toString();}
+        return "No such account found!";
+
     }
 
     //Implementation of update
