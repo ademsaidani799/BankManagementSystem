@@ -22,17 +22,11 @@ public class Account {
     private Date openingDate;
     private String type;
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     private BigDecimal currentBalance;
 
     private BigDecimal interestRate;
+
 
     public Long getId() {
         return id;
@@ -81,6 +75,14 @@ public class Account {
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
     }
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

@@ -79,4 +79,17 @@ public class Loan {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+    @Override
+    public String toString() {
+        return "Loan{" +
+                "id=" + id +
+                ", customer=" + (customer != null ? customer.getId() : null) +
+                ", branch=" + (branch != null ? branch.getId() : null) +
+                ", type='" + type + '\'' +
+                ", startingDate=" + startingDate +
+                ", dueDate=" + dueDate +
+                ", amount=" + amount +
+                '}';
+    }
+
 }

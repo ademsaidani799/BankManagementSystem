@@ -3,13 +3,7 @@ package com.example.BankManagementSystem.DTOs;
 public class EmployeeDto extends PersonDto {
     private Long id;
 
-    public BranchDto getBranchDto() {
-        return branchDto;
-    }
 
-    public void setBranchDto(BranchDto branchDto) {
-        this.branchDto = branchDto;
-    }
 
     public Long getId() {
         return id;
@@ -42,6 +36,13 @@ public class EmployeeDto extends PersonDto {
     }
 
     public void setBranch(BranchDto branchDto) {
+        this.branchDto = branchDto;
+    }
+    public BranchDto getBranchDto() {
+        return branchDto;
+    }
+
+    public void setBranchDto(BranchDto branchDto) {
         this.branchDto = branchDto;
     }
 }

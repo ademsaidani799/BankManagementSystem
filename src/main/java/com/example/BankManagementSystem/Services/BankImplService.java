@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -225,7 +226,22 @@ public Customer add(CustomerDto customerDto){
         return "No such account found!";
 
     }
+    public String getLoanDetails(Long id){
+        Optional<Loan> loan = loanRepositories.findById(id);
+        if (loan.isPresent()){return loan.get().toString();}
+        return "No such loan found!";
 
+    }
+    public String getBranchDetails(Long id){
+        Optional<Branch> branch = branchRepositories.findById(id);
+        if (branch.isPresent()){return branch.get().toString();}
+        return "No such branch found!";
+
+    }
+    public List<Employee> getBranchEmployees(Long branchId){
+return employeeRepositories.findEmployeesByBranch_Id(branchId);
+
+    }
     //Implementation of update
     public Account update(Long accountId, AccountDto accountDto) {
         // Retrieve the existing account from the database
@@ -426,4 +442,58 @@ public Customer add(CustomerDto customerDto){
             // You might want to throw an exception or handle it based on your application's logic
             throw new EntityNotFoundException("Branch with ID " + id + " not found");
         }
-    }}
+    }
+public String withdraw(Long accountId, BigDecimal amount){
+    Optional<Account> optionalAccount = accountRepositories.findById(accountId);
+    Account existingAccount = optionalAccount.get();
+    if(existingAccount.getCurrentBalance().subtract(amount).compareTo(BigDecimal.ZERO)>=0){
+        existingAccount.setCurrentBalance(existingAccount.getCurrentBalance().subtract(amount));
+       accountRepositories.saveAndFlush(existingAccount);
+        return "Success withdraw";
+    }else{
+        return "No enough balance";
+    }
+
+
+
+}
+    public String deposit(Long accountId, BigDecimal amount){
+        Optional<Account> optionalAccount = accountRepositories.findById(accountId);
+
+        if (optionalAccount.isPresent()) {
+            Account existingAccount = optionalAccount.get();
+
+            // Update balance using setBalance instead of add
+            existingAccount.setCurrentBalance(existingAccount.getCurrentBalance().add(amount));
+
+            accountRepositories.saveAndFlush(existingAccount);
+            return "Deposit succeeded";
+        } else {
+            // Handle the case when the account is not found
+            // You can throw an exception, log an error, or take other appropriate actions
+            // For example:
+            throw new RuntimeException("Account not found for ID: " + accountId);
+        }
+
+    }
+
+    public String transfer(Long fromAccountId, Long toAccountId, BigDecimal amount){
+        try {
+            // Withdraw from the source account
+            String withdrawResult = withdraw(fromAccountId, amount);
+
+            // If withdrawal is successful, deposit into the destination account
+            if (withdrawResult.equals("Success withdraw")) {
+                deposit(toAccountId, amount);
+                return "Transfer succeeded";
+            } else {
+                // Handle the case when withdrawal fails (e.g., not enough balance)
+                return "Transfer failed: " + withdrawResult;
+            }
+        } catch (RuntimeException e) {
+            // Handle exceptions thrown during withdrawal (e.g., account not found)
+            return "Transfer failed: " + e.getMessage();
+        }
+    }
+
+}

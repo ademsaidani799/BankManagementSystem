@@ -39,5 +39,13 @@ public class Branch {
         this.phone = phone;
     }
 
+    @Override
+    public String toString() {
+        return "Branch{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 
 }
