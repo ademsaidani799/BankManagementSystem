@@ -3,15 +3,15 @@ package com.example.BankManagementSystem.DTOs;
 public class BranchDto {
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
+
 
     private String address;
 
     private String phone;
 
-
+    public Long getId() {
+        return id;
+    }
     public String getAddress() {
         return address;
     }

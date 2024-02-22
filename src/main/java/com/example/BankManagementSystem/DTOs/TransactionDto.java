@@ -1,5 +1,8 @@
 package com.example.BankManagementSystem.DTOs;
 
+import com.example.BankManagementSystem.Entities.Branch;
+import com.example.BankManagementSystem.Entities.Customer;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -7,9 +10,6 @@ public class TransactionDto {
 
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
 
     private Date date;
 
@@ -18,6 +18,10 @@ public class TransactionDto {
 
     private EmployeeDto teller;
     private String type;
+    public Long getId() {
+        return id;
+    }
+
 
     public AccountDto getAccountDto() {
         return accountDto;

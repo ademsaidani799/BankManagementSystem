@@ -9,9 +9,9 @@ import java.util.Optional;
 public interface Bank {
 
     // Create
-    public Customer add(CustomerDto customerDto);
+    public Customer add(CustomerDto customerDto) throws Exception;
     public Employee add(EmployeeDto employee);
-    public Account add(AccountDto accountDto);
+    public Account add(AccountDto accountDto) throws Exception;
     public Loan addLoan(LoanDto loanDto);
     public Branch addBranch(BranchDto branchDto);
 

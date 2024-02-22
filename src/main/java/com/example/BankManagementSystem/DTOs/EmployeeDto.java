@@ -1,5 +1,12 @@
 package com.example.BankManagementSystem.DTOs;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.FetchType;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class EmployeeDto extends PersonDto {
     private Long id;
 
@@ -14,6 +21,20 @@ public class EmployeeDto extends PersonDto {
     private EmployeeDto manager;
 
     private BranchDto branchDto;
+
+    public List<GrantedAuthority> getAuthorities() {
+        if (authorities == null) {
+            this.authorities = new ArrayList<>();
+        }
+        return authorities;
+    }
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<GrantedAuthority> authorities = //
+            new ArrayList<>();
 
     public String getPosition() {
         return position;

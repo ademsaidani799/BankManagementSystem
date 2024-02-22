@@ -7,13 +7,7 @@ public class AccountDto {
 
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     private CustomerDto customerDto;
 
@@ -21,6 +15,14 @@ public class AccountDto {
 
     private Date openingDate;
     private String type;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public CustomerDto getCustomerDto() {
         return customerDto;

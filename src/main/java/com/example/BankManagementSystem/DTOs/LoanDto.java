@@ -7,9 +7,7 @@ public class LoanDto {
 
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
+
 
     private CustomerDto customerDto;
 
@@ -21,6 +19,9 @@ public class LoanDto {
     private Date dueDate;
 
     private BigDecimal amount;
+    public Long getId() {
+        return id;
+    }
 
     public CustomerDto getCustomerDto() {
         return customerDto;

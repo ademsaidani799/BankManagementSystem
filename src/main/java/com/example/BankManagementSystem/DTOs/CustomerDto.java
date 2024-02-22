@@ -1,10 +1,26 @@
 package com.example.BankManagementSystem.DTOs;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.FetchType;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class CustomerDto extends PersonDto {
     private Long id;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<GrantedAuthority> authorities = //
+            new ArrayList<>();
+    public List<GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
 
     public List<AccountDto> getAccountDtos() {
         return accountDtos;

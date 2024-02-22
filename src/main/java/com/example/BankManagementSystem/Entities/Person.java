@@ -1,18 +1,18 @@
 package com.example.BankManagementSystem.Entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @MappedSuperclass
 public abstract class Person {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    private String login;
-    private int passhash;
+    private String username;
+    private String password;
 
     private String name;
     private String phone;
@@ -20,28 +20,28 @@ public abstract class Person {
 
     private Date registrationDate;
 
-    public Long getId() {
-        return id;
+    public Person() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Person(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getPasshash() {
-        return passhash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasshash(int passhash) {
-        this.passhash = passhash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

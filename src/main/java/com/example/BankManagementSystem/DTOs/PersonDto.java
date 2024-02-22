@@ -1,17 +1,19 @@
 package com.example.BankManagementSystem.DTOs;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.FetchType;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class PersonDto {
 
-    private Long id;
 
-    public Long getId() {
-        return id;
-    }
 
-    private String login;
-    private int passhash;
+    private String username;
+    private String password;
 
     private String name;
     private String phone;
@@ -21,20 +23,20 @@ public abstract class PersonDto {
 
 
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getPasshash() {
-        return passhash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasshash(int passhash) {
-        this.passhash = passhash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
