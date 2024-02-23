@@ -15,10 +15,10 @@ public class Transaction {
 
     private BigDecimal amount;
     @ManyToOne
-    @JoinColumn(name="account_id")
+    @JoinColumn(name = "account_id")
     private Account account;
     @ManyToOne
-    @JoinColumn(name="teller_id")
+    @JoinColumn(name = "teller_id")
     private Employee teller;
     private String type;
 

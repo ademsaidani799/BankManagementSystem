@@ -19,7 +19,6 @@ public class Customer extends Person {
     private Long id;
 
 
-
     @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
 
@@ -85,6 +84,7 @@ public class Customer extends Person {
     public void setLoans(List<Loan> loans) {
         this.loans = loans;
     }
+
     public Long getId() {
         return id;
     }

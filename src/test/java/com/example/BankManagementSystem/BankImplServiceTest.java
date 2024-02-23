@@ -74,6 +74,7 @@ class BankImplServiceTest {
 // then
         assertThat(branchDetails).isEqualTo("Branch{id=1, address='Main Street, City Center', phone='555-1234'}");
     }
+
     @Test
     void creatingANewBranchShouldReturnTheSameData() {
 // given
@@ -84,12 +85,12 @@ class BankImplServiceTest {
         given(branchRepositories.saveAndFlush(any(Branch.class)))
                 .willReturn(branch);
 // when
-        BranchDto                branchDto = new BranchDto();
+        BranchDto branchDto = new BranchDto();
         branchDto.setAddress("Main Street, City Center");
         branchDto.setPhone("555-1234");
-        Branch newBranch= service.addBranch(branchDto);
+        Branch newBranch = service.addBranch(branchDto);
 // then
-    assertThat(newBranch.getId()).isEqualTo(1);
+        assertThat(newBranch.getId()).isEqualTo(1);
         assertThat(newBranch.getAddress()).isEqualTo("Main Street, City Center");
         assertThat(newBranch.getPhone()).isEqualTo("555-1234");
     }

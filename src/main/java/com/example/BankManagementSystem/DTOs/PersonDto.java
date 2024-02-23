@@ -11,7 +11,6 @@ import java.util.List;
 public abstract class PersonDto {
 
 
-
     private String username;
     private String password;
 
@@ -20,7 +19,6 @@ public abstract class PersonDto {
     private String email;
 
     private Date registrationDate;
-
 
 
     public String getUsername() {

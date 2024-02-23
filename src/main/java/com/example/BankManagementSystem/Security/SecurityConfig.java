@@ -21,8 +21,8 @@ public class SecurityConfig {
     @Bean
     CommandLineRunner initUsers(CustomerManagementRepositories customerManagementRepositories, EmployeeManagementRepositories employeeManagementRepositories) {
         return args -> {
-      customerManagementRepositories.save(new Customer("user", "password","ROLE_USER"));
-           employeeManagementRepositories.save(new Employee("admin", "password", "ROLE_ADMIN"));
+            customerManagementRepositories.save(new Customer("user", "password", "ROLE_USER"));
+            employeeManagementRepositories.save(new Employee("admin", "password", "ROLE_ADMIN"));
         };
     }
 
@@ -45,6 +45,7 @@ public class SecurityConfig {
             }
         };
     }
+
     @Bean
     SecurityFilterChain configureSecurity(HttpSecurity http) throws Exception {
         http
@@ -55,10 +56,10 @@ public class SecurityConfig {
 
                 .anyRequest().denyAll()
                 .and()
-                .httpBasic()  .and()
+                .httpBasic().and()
                 .csrf().disable()
                 .headers().frameOptions().disable()
-              ;
+        ;
         return http.build();
     }
 

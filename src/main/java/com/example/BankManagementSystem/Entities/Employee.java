@@ -14,28 +14,40 @@ import java.util.List;
 public class Employee extends Person {
 
     @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
 
     private String position;
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Employee manager;
+    @ManyToOne
+    @JoinColumn(name = "branch_id")
+    private Branch branch;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<GrantedAuthority> authorities = //
+            new ArrayList<>();
+    public Employee() {
+    }
+
+    public Employee(String username, String password, String... authorities) {
+        super(username, password);
+
+        this.authorities = Arrays.stream(authorities) //
+                .map(SimpleGrantedAuthority::new) //
+                .map(GrantedAuthority.class::cast) //
+                .toList();
+    }
 
     public Long getId() {
         return id;
     }
 
-
     public void setId(Long id) {
         this.id = id;
     }
 
-
-    @ManyToOne
-    @JoinColumn(name="manager_id")
-    private Employee manager;
-    @ManyToOne
-    @JoinColumn(name="branch_id")
-    private Branch branch;
     public List<GrantedAuthority> getAuthorities() {
         if (authorities == null) {
             this.authorities = new ArrayList<>();
@@ -46,20 +58,7 @@ public class Employee extends Person {
     public void setAuthorities(List<GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<GrantedAuthority> authorities = //
-            new ArrayList<>();
 
-    public Employee() {
-    }
-
-    public Employee(String username, String password, String... authorities) {
-        super(username,password);
-
-        this.authorities = Arrays.stream(authorities) //
-                .map(SimpleGrantedAuthority::new) //
-                .map(GrantedAuthority.class::cast) //
-                .toList();    }
     public UserDetails asUser() {
         UserDetails userDetails = User.withDefaultPasswordEncoder()
                 .username(getUsername())

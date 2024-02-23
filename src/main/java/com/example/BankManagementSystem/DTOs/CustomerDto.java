@@ -14,6 +14,9 @@ public class CustomerDto extends PersonDto {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<GrantedAuthority> authorities = //
             new ArrayList<>();
+    private List<AccountDto> accountDtos;
+    private List<LoanDto> loanDtos;
+
     public List<GrantedAuthority> getAuthorities() {
         return authorities;
     }
@@ -41,10 +44,6 @@ public class CustomerDto extends PersonDto {
     public Long getId() {
         return id;
     }
-
-    private List<AccountDto> accountDtos;
-
-    private List<LoanDto> loanDtos;
 
     public List<AccountDto> getAccounts() {
         return accountDtos;

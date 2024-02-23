@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 @Entity
 public class Account {
     @Id
@@ -12,21 +13,18 @@ public class Account {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="customer_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name="branch_id")
+    @JoinColumn(name = "branch_id")
     private Branch branch;
+
 
     private Date openingDate;
     private String type;
-
-
     private BigDecimal currentBalance;
-
     private BigDecimal interestRate;
-
 
     public Long getId() {
         return id;
@@ -75,6 +73,7 @@ public class Account {
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
     }
+
     public String getType() {
         return type;
     }

@@ -1,11 +1,8 @@
 package com.example.BankManagementSystem.Entities;
 
-import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
+import jakarta.persistence.MappedSuperclass;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @MappedSuperclass
 public abstract class Person {

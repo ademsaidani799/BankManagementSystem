@@ -41,11 +41,7 @@ public class Branch {
 
     @Override
     public String toString() {
-        return "Branch{" +
-                "id=" + id +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+        return "Branch{" + "id=" + id + ", address='" + address + '\'' + ", phone='" + phone + '\'' + '}';
     }
 
 }

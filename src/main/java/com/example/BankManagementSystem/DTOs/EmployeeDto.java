@@ -9,18 +9,16 @@ import java.util.List;
 
 public class EmployeeDto extends PersonDto {
     private Long id;
-
-
+    private String position;
+    private EmployeeDto manager;
+    private BranchDto branchDto;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<GrantedAuthority> authorities = //
+            new ArrayList<>();
 
     public Long getId() {
         return id;
     }
-
-    private String position;
-
-    private EmployeeDto manager;
-
-    private BranchDto branchDto;
 
     public List<GrantedAuthority> getAuthorities() {
         if (authorities == null) {
@@ -32,9 +30,6 @@ public class EmployeeDto extends PersonDto {
     public void setAuthorities(List<GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<GrantedAuthority> authorities = //
-            new ArrayList<>();
 
     public String getPosition() {
         return position;
@@ -59,6 +54,7 @@ public class EmployeeDto extends PersonDto {
     public void setBranch(BranchDto branchDto) {
         this.branchDto = branchDto;
     }
+
     public BranchDto getBranchDto() {
         return branchDto;
     }

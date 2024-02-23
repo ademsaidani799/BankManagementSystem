@@ -18,6 +18,7 @@ public class TransactionDto {
 
     private EmployeeDto teller;
     private String type;
+
     public Long getId() {
         return id;
     }

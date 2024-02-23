@@ -17,6 +17,7 @@ public class CoreDomainTest {
         assertThat(entity.getPassword()).isEqualTo("password");
 
     }
+
     @Test
     void settersShouldMutateState() {
         Customer entity = new Customer("Adem",
@@ -31,6 +32,7 @@ public class CoreDomainTest {
         assertThat(entity.getPassword()) //
                 .isEqualTo("new pass");
     }
+
     @Test
     void newEmployeeShouldHaveNullId() {
         Employee employee = new Employee("John", "password", "ROLE_TELLER");

@@ -11,10 +11,10 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name="customer_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
     @ManyToOne
-    @JoinColumn(name="branch_id")
+    @JoinColumn(name = "branch_id")
     private Branch branch;
 
     private String type;
@@ -79,6 +79,7 @@ public class Loan {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+
     @Override
     public String toString() {
         return "Loan{" +

@@ -4,7 +4,7 @@ import com.example.BankManagementSystem.Entities.Account;
 import com.example.BankManagementSystem.Entities.Branch;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BranchRepositories extends JpaRepository<Branch,Long> {
+public interface BranchRepositories extends JpaRepository<Branch, Long> {
 
-Branch findByAddress(String address);
+    Branch findByAddress(String address);
 }

@@ -8,13 +8,14 @@ public class AccountDto {
     private Long id;
 
 
-
     private CustomerDto customerDto;
 
     private BranchDto branchDto;
 
     private Date openingDate;
     private String type;
+    private BigDecimal currentBalance;
+    private BigDecimal interestRate;
 
     public Long getId() {
         return id;
@@ -47,11 +48,6 @@ public class AccountDto {
     public void setType(String type) {
         this.type = type;
     }
-
-    private BigDecimal currentBalance;
-
-    private BigDecimal interestRate;
-
 
     public CustomerDto getCustomer() {
         return customerDto;
