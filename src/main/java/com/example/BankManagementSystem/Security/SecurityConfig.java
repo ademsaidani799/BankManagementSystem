@@ -51,7 +51,6 @@ public class SecurityConfig {
         http
                 .authorizeRequests() // Use authorizeRequests() instead of authorizeHttpRequests()
                 .requestMatchers("/login").permitAll()
-                .requestMatchers("/").authenticated()
                 .requestMatchers("/api/**").authenticated()
 
                 .anyRequest().denyAll()
